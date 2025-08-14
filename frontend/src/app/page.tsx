@@ -43,7 +43,7 @@ export default function HomePage() {
               onClick={() => router.push('/login')}
               className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
             >
-              시작하기
+              시작하기 99
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
