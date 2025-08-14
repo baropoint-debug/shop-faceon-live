@@ -1,7 +1,7 @@
 import app from './app';
 import { testConnection } from './config/database';
 
-const PORT = process.env.BACKEND_PORT || 6000;
+const PORT = process.env.BACKEND_PORT || 4002;
 
 const startServer = async () => {
   try {

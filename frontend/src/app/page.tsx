@@ -1,201 +1,91 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Sparkles, Users, Heart, Globe, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
+import { useState } from 'react';
 
-export default function HomePage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // 토큰이 있으면 대시보드로 리다이렉트
-    const token = localStorage.getItem('token');
-    if (token) {
-      router.push('/dashboard');
-    }
-  }, [router]);
-
+export default function AddonHome() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
-      {/* Background decorations */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    <main className="addon-container" style={{ paddingTop: 24, paddingBottom: 24, flex:1 }}>
+
+      {/* Hero */}
+      <section className="addon-inner addon-hero addon-shadow-md" style={{ padding: 28 }}>
+        <div className="addon-title-row" style={{ alignItems:'flex-end' }}>
+          <div style={{ display:'grid', gap:10 }}>
+            <span className="addon-kicker">Enterprise</span>
+            <h1 className="addon-display"><span className="addon-gradient-text">기업용 숏폼 AI 챗봇 서비스</span></h1>
+            <p className="addon-lead">고객 질문을 이해하고 답변을 생성, 답변에 맞는 태그의 숏폼 동영상을 함께 재생하여 이해와 전환을 높입니다.</p>
+            <p className="addon-lead" style={{ marginTop: -6 }}>텍스트+동영상으로 서비스 소개와 리드 수집을 동시에 수행하는 대화형 챗봇 서비스</p>
+            <div className="addon-cta-group" style={{ marginTop: 4 }}>
+              <Link className="addon-btn addon-btn-primary" href="/dashboard">내 챗봇 대화하기</Link>
+              <Link className="addon-btn addon-btn-outline" href="/datasets">자료 등록하기</Link>
+            </div>
+            <span className="addon-subtle">AI 자동 숏폼 채팅 · 설정 1분 · 웹/파일/FAQ 크롤링</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 특징 섹션 */}
+      <section className="addon-inner" style={{ margin: '16px auto' }}>
+        <div className="addon-grid-12">
+          <div className="addon-card addon-shadow-sm addon-col-4" style={{ padding: 20 }}>
+            <div className="addon-feature-icon">🎯</div>
+            <h3 style={{ fontWeight:800, marginTop:10, marginBottom: 6 }}>태그 기반 숏폼</h3>
+            <p style={{ color:'#4B5563', fontSize:14 }}>답변에 맞는 태그를 선택해 관련 동영상을 자동 재생하여 전달력을 강화합니다.</p>
+          </div>
+          <div className="addon-card addon-shadow-sm addon-col-4" style={{ padding: 20 }}>
+            <div className="addon-feature-icon">📇</div>
+            <h4 style={{ fontWeight:800, marginTop:10, marginBottom:6 }}>리드 유도</h4>
+            <p style={{ color:'#4B5563', fontSize:14 }}>페르소나 설정 시 리드 유도 목표(전화, 카톡 또는 예약 링크)를 지정하면 AI가 대화 중 자동으로 유도합니다.</p>
+          </div>
+          <div className="addon-card addon-shadow-sm addon-col-4" style={{ padding: 20 }}>
+            <div className="addon-feature-icon">🔗</div>
+            <h3 style={{ fontWeight:800, marginTop:10, marginBottom: 6 }}>데이터 연동</h3>
+            <p style={{ color:'#4B5563', fontSize:14 }}>웹 크롤링 · 파일 · FAQ를 신속히 반영하며 FAQ를 우선 참고합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 동작 방식 */}
+      <section className="addon-card addon-inner addon-shadow-sm" style={{ padding: 22, margin: '16px auto' }}>
+        <h3 style={{ fontWeight:900, fontSize:18, marginBottom: 10 }}>어떻게 동작하나요?</h3>
+        <hr className="addon-divider" />
+        <ol style={{ color:'#374151', display:'grid', gap:10, marginTop: 12 }}>
+          <li><strong>1)</strong> 업종을 선택하고 추천 태그/소재를 검토합니다.</li>
+          <li><strong>2)</strong> 업종에 맞는 추천 페르소나를 선택 후 세부 수정하세요.</li>
+          <li><strong>3)</strong> 데이터(웹/파일/FAQ)를 등록하고 채팅 내역을 확인하여 FAQ를 업데이트하세요.</li>
+          <li><strong>4)</strong> 고객 질문 + 페르소나 + 태그를 조합해 답변과 함께 태그 숏폼이 재생됩니다.</li>
+        </ol>
+      </section>
+
+      {/* 추천 챗봇: 페이지 내 임베드 미리보기 */}
+      <div className="addon-inner" style={{ marginTop: 16 }}>
+        <section className="addon-card addon-shadow-sm" style={{ padding: 16 }}>
+          <h3 style={{ fontWeight:900, marginBottom: 12 }}>예시 챗봇</h3>
+          <div style={{ display:'grid', gap:12 }} className="addon-grid-3">
+            <ChatEmbedCard label="일반 채팅 1" href="/chat/1" />
+            <ChatEmbedCard label="일반 채팅 2" href="/chat/2" />
+            <ChatEmbedCard label="일반 채팅 3" href="/chat/3" />
+          </div>
+        </section>
       </div>
+    </main>
+  );
+}
 
-      {/* Header */}
-      <header className="relative z-10 bg-white/80 backdrop-blur-sm border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                FaceOn
-              </h1>
-            </div>
-
-            <Button
-              onClick={() => router.push('/login')}
-              className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-            >
-              시작하기 99
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <main className="relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl mb-8 shadow-2xl">
-              <Sparkles className="w-10 h-10 text-white" />
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              새로운 연결의 시작
-              <br />
-              <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                FaceOn
-              </span>
-            </h1>
-            
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              현대적이고 아름다운 인터페이스로 새로운 사람들과 만나고, 
-              소통하며, 함께 성장하는 플랫폼입니다.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button
-                onClick={() => router.push('/login')}
-                size="lg"
-                className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                지금 시작하기
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 text-lg font-semibold rounded-xl border-2 border-gray-300 hover:border-indigo-500 hover:text-indigo-600 transition-all duration-200"
-              >
-                더 알아보기
-              </Button>
-            </div>
-          </div>
-
-          {/* Features */}
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mb-6 shadow-lg">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  새로운 만남
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  전 세계 사람들과 연결되고 새로운 친구들을 만나보세요. 
-                  공통의 관심사로 소통할 수 있습니다.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl mb-6 shadow-lg">
-                  <Heart className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  따뜻한 소통
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  진정한 소통과 공감을 통해 의미있는 관계를 
-                  만들어가는 따뜻한 커뮤니티입니다.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="backdrop-blur-sm bg-white/80 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <CardContent className="p-8 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl mb-6 shadow-lg">
-                  <Globe className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  글로벌 연결
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  언어와 문화의 경계를 넘어 전 세계 사람들과 
-                  소통하고 서로의 문화를 배워보세요.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-indigo-500 to-purple-600 py-20">
-          <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-bold text-white mb-6">
-              지금 바로 시작해보세요
-            </h2>
-            <p className="text-xl text-indigo-100 mb-8 leading-relaxed">
-              무료로 가입하고 새로운 사람들과의 만남을 시작하세요. 
-              몇 분만에 설정을 완료할 수 있습니다.
-            </p>
-            <Button
-              onClick={() => router.push('/login')}
-              size="lg"
-              className="bg-white text-indigo-600 hover:bg-gray-50 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-            >
-              무료로 시작하기
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="relative z-10 bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold">FaceOn</span>
-            </div>
-            <p className="text-gray-400">
-              © 2024 FaceOn. 모든 권리 보유.
-            </p>
-          </div>
-        </div>
-      </footer>
-
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
+function ChatEmbedCard({ label, href }: { label: string; href: string }) {
+  return (
+    <div className="addon-card" style={{ padding: 12 }}>
+      <div style={{ fontWeight:700, marginBottom: 8 }}>{label}</div>
+      <iframe
+        src={href}
+        title={label}
+        style={{ width:'100%', height: 640, border:'1px solid #E5E7EB', borderRadius: 12 }}
+        allow="microphone; camera; autoplay; clipboard-read; clipboard-write"
+      />
     </div>
   );
 }
+
+// 샘플 프리뷰 컴포넌트 제거
+
+

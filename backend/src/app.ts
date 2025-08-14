@@ -20,8 +20,8 @@ app.use(cors({
   origin: [
     'http://shop.faceon.live',
     'https://shop.faceon.live',
-    'http://localhost:5000',
-    'https://localhost:5000'
+    'http://localhost:3002',
+    'https://localhost:3002'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

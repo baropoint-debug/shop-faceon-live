@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:6000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4002/api';
 
 // 디버깅: 실제 API URL 확인
 console.log('🔍 API_BASE_URL:', API_BASE_URL);

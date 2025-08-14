@@ -8,11 +8,11 @@ module.exports = {
       exec_mode: 'cluster',
       env: {
         NODE_ENV: 'production',
-        BACKEND_PORT: 6000
+        BACKEND_PORT: 4002
       },
       env_production: {
         NODE_ENV: 'production',
-        BACKEND_PORT: 6000
+        BACKEND_PORT: 4002
       },
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
       error_file: '/data/www_logs/shop-backend-error.log',
@@ -33,11 +33,11 @@ module.exports = {
       exec_mode: 'cluster',
       env: {
         NODE_ENV: 'production',
-        PORT: 5000
+        PORT: 3002
       },
       env_production: {
         NODE_ENV: 'production',
-        PORT: 5000
+        PORT: 3002
       },
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
       error_file: '/data/www_logs/shop-frontend-error.log',
